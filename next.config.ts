@@ -18,6 +18,7 @@ const securityHeaders = [
       "img-src 'self' data: blob:",
       "font-src 'self' data:",
       "connect-src 'self' https://formspree.io ws: wss: https:",
+      "frame-src 'self'",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self' mailto:",
@@ -31,6 +32,14 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1", "localhost"],
   images: {
     formats: ["image/avif", "image/webp"],
+  },
+  async rewrites() {
+    return [
+      { source: "/demos/yt", destination: "/demos/yt/index.html" },
+      { source: "/demos/yt/:path*", destination: "/demos/yt/index.html" },
+      { source: "/demos/tara", destination: "/demos/tara/index.html" },
+      { source: "/demos/tara/:path*", destination: "/demos/tara/index.html" },
+    ];
   },
   async headers() {
     return [

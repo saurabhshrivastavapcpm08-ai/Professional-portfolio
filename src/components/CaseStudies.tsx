@@ -65,7 +65,7 @@ export function CaseStudies() {
                     href={study.href}
                     className="inline-flex rounded-md bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ink)] transition-[transform,filter] duration-150 hover:brightness-110 active:scale-[0.97]"
                   >
-                    Open case study
+                    Launch interactive demo
                   </Link>
                   <a
                     href={study.github}

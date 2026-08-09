@@ -44,6 +44,18 @@ export function Introduction() {
                 See my work
               </a>
               <a
+                href="#work-solera"
+                className="inline-flex rounded-md border border-[var(--accent)]/40 bg-[var(--accent)]/10 px-5 py-3 text-sm font-medium text-[var(--accent-soft)] transition-colors hover:bg-[var(--accent)]/20 active:scale-[0.97]"
+              >
+                Solera ownership
+              </a>
+              <a
+                href="#work-tekion"
+                className="inline-flex rounded-md border border-white/25 bg-white/5 px-5 py-3 text-sm font-medium text-[var(--paper)] backdrop-blur-sm transition-colors hover:bg-white/10 active:scale-[0.97]"
+              >
+                Tekion ownership
+              </a>
+              <a
                 href="#case-studies"
                 className="inline-flex rounded-md border border-white/25 bg-white/5 px-5 py-3 text-sm font-medium text-[var(--paper)] backdrop-blur-sm transition-colors hover:bg-white/10 active:scale-[0.97]"
               >

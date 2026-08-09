@@ -2,8 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Outfit } from "next/font/google";
 import { ClientErrorProbe } from "@/components/ClientErrorProbe";
 import { ContentProtection } from "@/components/ContentProtection";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
 import { site } from "@/data/content";
 import "./globals.css";
 
@@ -68,9 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-[var(--ink-deep)] text-[var(--paper)]">
         <ContentProtection />
         <ClientErrorProbe />
-        <SiteHeader />
-        <main className="allow-select relative z-0 flex-1">{children}</main>
-        <SiteFooter />
+        {children}
       </body>
     </html>
   );
