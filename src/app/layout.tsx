@@ -1,20 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Outfit } from "next/font/google";
+import { Instrument_Serif, Manrope } from "next/font/google";
 import { ClientErrorProbe } from "@/components/ClientErrorProbe";
 import { ContentProtection } from "@/components/ContentProtection";
 import { site } from "@/data/content";
 import "./globals.css";
 
-const display = Fraunces({
+const display = Instrument_Serif({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400"],
+  style: ["normal", "italic"],
 });
 
-const body = Outfit({
+const body = Manrope({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -23,12 +24,12 @@ export const metadata: Metadata = {
     template: "%s · Saurabh Shrivastava",
   },
   description:
-    "Strategic Product Manager specializing in AI-powered B2B/B2B2C SaaS, omnichannel communications, GTM, and monetization. Open to mid-management Product Manager roles.",
+    "Senior Product Manager building and scaling AI-powered B2B/B2C SaaS across CRM, customer experience, GTM, and monetization.",
   metadataBase: new URL("https://saurabhshrivastava.portfolio"),
   openGraph: {
     title: "Saurabh Shrivastava — Product Manager",
     description:
-      "AI-Powered SaaS & Omnichannel Communications | GTM & Monetization. Portfolio of product work at Solera and Tekion.",
+      "AI-powered SaaS, CRM & customer experience. Product strategy through GTM and monetization.",
     type: "website",
     locale: "en_US",
   },
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Saurabh Shrivastava — Product Manager",
     description:
-      "AI-Powered SaaS & Omnichannel Communications | GTM & Monetization.",
+      "AI-powered SaaS, CRM & customer experience. Product strategy through GTM and monetization.",
   },
   robots: {
     index: true,
@@ -52,7 +53,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#070b14",
+  themeColor: "#f6f5f2",
   width: "device-width",
   initialScale: 1,
 };
@@ -63,7 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--ink-deep)] text-[var(--paper)]">
+      <body className="flex min-h-full flex-col bg-[var(--paper)] text-[var(--ink)]">
         <ContentProtection />
         <ClientErrorProbe />
         {children}

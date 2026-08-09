@@ -1,97 +1,78 @@
-"use client";
-
-import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
-import {
-  certifications,
-  education,
-  experience,
-} from "@/data/content";
+import { certifications, education, experience } from "@/data/content";
 
 export function Experience() {
   return (
     <section
       id="timeline"
-      className="relative scroll-mt-24 border-t border-white/10 bg-[var(--ink-deep)] py-20 sm:py-24"
+      className="relative scroll-mt-24 border-y border-[var(--line)] bg-[var(--paper-elevated)] py-[var(--section-pad)]"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto max-w-[1120px] px-5 sm:px-8">
         <SectionHeading
           index="04"
-          eyebrow="Professional timeline"
+          eyebrow="Timeline"
           title="Roles, ownership & growth"
-          description="From automotive SaaS product leadership to foundational B2B sales and operations — with ISB product certification along the way."
+          description="From automotive SaaS product leadership to foundational B2B growth — with ISB product certification along the way."
         />
 
-        <div className="relative mt-14">
-          <div
-            aria-hidden
-            className="absolute bottom-0 left-4 top-0 w-px bg-gradient-to-b from-[var(--accent)] via-white/20 to-transparent sm:left-6"
-          />
-          <Stagger className="space-y-10">
-            {experience.map((job) => (
-              <StaggerItem key={job.company} className="relative pl-12 sm:pl-16">
-                <span className="absolute left-2 top-2 h-4 w-4 rounded-full border-2 border-[var(--accent)] bg-[var(--ink-deep)] sm:left-4" />
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-7">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h3 className="font-[family-name:var(--font-display)] text-2xl text-[var(--paper)]">
-                      {job.company}
-                    </h3>
-                    <p className="text-sm font-medium text-[var(--accent-soft)]">
-                      {job.dates}
-                    </p>
-                  </div>
-                  <p className="mt-1 text-sm text-[var(--muted)]">
-                    {job.role} · {job.location}
-                  </p>
-                  <ul className="mt-4 space-y-2.5">
-                    {job.bullets.map((bullet) => (
-                      <li
-                        key={bullet}
-                        className="relative pl-4 text-sm leading-relaxed text-[var(--muted-strong)] before:absolute before:left-0 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-[var(--accent)]"
-                      >
-                        {bullet}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
+        <ol className="mt-14 space-y-0 border-t border-[var(--line)]">
+          {experience.map((job) => (
+            <li
+              key={job.company}
+              className="grid gap-4 border-b border-[var(--line)] py-10 md:grid-cols-[11rem_1fr] md:gap-12"
+            >
+              <p className="text-sm font-medium text-[var(--accent)]">{job.dates}</p>
+              <div>
+                <h3 className="font-display text-2xl tracking-[-0.02em] text-[var(--ink)] sm:text-3xl">
+                  {job.company}
+                </h3>
+                <p className="mt-2 text-sm text-[var(--muted)]">
+                  {job.role} · {job.location}
+                </p>
+                <ul className="mt-5 max-w-2xl space-y-2.5">
+                  {job.bullets.map((bullet) => (
+                    <li
+                      key={bullet}
+                      className="relative pl-4 text-sm leading-relaxed text-[var(--muted-strong)] before:absolute before:left-0 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-[var(--accent)]"
+                    >
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ol>
 
-        <Reveal className="mt-16 grid gap-10 border-t border-white/10 pt-12 lg:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 p-6">
-            <h3 className="font-[family-name:var(--font-display)] text-xl text-[var(--paper)]">
-              Education
-            </h3>
-            <ul className="mt-5 space-y-5">
+        <div className="mt-16 grid gap-12 border-t border-[var(--line)] pt-12 lg:grid-cols-2">
+          <div>
+            <h3 className="font-display text-2xl text-[var(--ink)]">Education</h3>
+            <ul className="mt-6 space-y-6">
               {education.map((item) => (
                 <li key={item.school}>
-                  <p className="font-medium text-[var(--paper)]">{item.school}</p>
-                  <p className="text-sm text-[var(--muted-strong)]">
+                  <p className="font-medium text-[var(--ink)]">{item.school}</p>
+                  <p className="mt-1 text-sm text-[var(--muted-strong)]">
                     {item.credential}
                   </p>
-                  <p className="text-xs text-[var(--muted)]">{item.dates}</p>
+                  <p className="mt-1 text-xs text-[var(--muted)]">{item.dates}</p>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl border border-white/10 p-6">
-            <h3 className="font-[family-name:var(--font-display)] text-xl text-[var(--paper)]">
-              Certifications
-            </h3>
-            <div className="mt-5 flex flex-wrap gap-2">
+          <div>
+            <h3 className="font-display text-2xl text-[var(--ink)]">Certifications</h3>
+            <ul className="mt-6 space-y-2">
               {certifications.map((item) => (
-                <span
+                <li
                   key={item}
-                  className="rounded-lg border border-white/10 px-3 py-1.5 text-xs text-[var(--muted-strong)]"
+                  className="border-b border-[var(--line)] pb-2 text-sm text-[var(--muted-strong)] last:border-0"
                 >
                   {item}
-                </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

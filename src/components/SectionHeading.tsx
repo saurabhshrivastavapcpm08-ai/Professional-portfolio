@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
 
 type SectionHeadingProps = {
-  index: string;
+  index?: string;
   eyebrow?: string;
   title: string;
   description?: string;
   id?: string;
+  children?: ReactNode;
 };
 
 export function SectionHeading({
@@ -16,22 +17,18 @@ export function SectionHeading({
   id,
 }: SectionHeadingProps) {
   return (
-    <div id={id} className="scroll-mt-28">
-      <p className="flex items-center gap-3 text-sm font-medium tracking-[0.2em] text-[var(--accent)]">
-        <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-xs">
-          {index}
-        </span>
-        {eyebrow ? (
-          <span className="uppercase text-[var(--accent-soft)]">{eyebrow}</span>
-        ) : null}
-      </p>
-      <h2 className="mt-4 max-w-3xl font-[family-name:var(--font-display)] text-3xl tracking-[-0.02em] text-[var(--paper)] sm:text-4xl lg:text-[2.75rem]">
+    <div id={id} className="scroll-mt-28 max-w-3xl">
+      {(eyebrow || index) && (
+        <p className="eyebrow flex items-center gap-3">
+          {index ? <span className="tabular-nums text-[var(--muted)]">{index}</span> : null}
+          {eyebrow ? <span>{eyebrow}</span> : null}
+        </p>
+      )}
+      <h2 className="font-display mt-4 text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.12] tracking-[-0.02em] text-[var(--ink)]">
         {title}
       </h2>
       {description ? (
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--muted-strong)] sm:text-lg">
-          {description}
-        </p>
+        <p className="prose-muted mt-5 text-base sm:text-lg">{description}</p>
       ) : null}
     </div>
   );

@@ -488,10 +488,9 @@ export const certifications = [
 ];
 
 export const navItems = [
-  { href: "/#introduction", label: "Introduction" },
   { href: "/#work", label: "Work" },
-  { href: "/#case-studies", label: "Case Studies" },
+  { href: "/#case-studies", label: "Cases" },
   { href: "/#skills", label: "Skills" },
   { href: "/#timeline", label: "Timeline" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/#contact", label: "Connect" },
 ];

@@ -31,7 +31,7 @@ export function ClientErrorProbe() {
   return (
     <div
       role="alert"
-      className="fixed bottom-4 left-4 right-4 z-[100] rounded-lg border border-red-400/40 bg-red-950/90 p-4 text-sm text-red-100 shadow-lg sm:left-auto sm:max-w-md"
+      className="fixed bottom-4 left-4 right-4 z-[100] rounded border border-red-200 bg-red-50 p-4 text-sm text-red-900 sm:left-auto sm:max-w-md"
     >
       <p className="font-semibold">Page error</p>
       <p className="mt-1 break-words">{error}</p>

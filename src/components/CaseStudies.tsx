@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { portfolioCaseStudies, site } from "@/data/content";
 
@@ -16,14 +13,9 @@ function CaseStudyCtas({
   demoHref?: string;
   github?: string;
 }) {
-  const primaryClass =
-    "inline-flex rounded-md bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ink)] transition-[transform,filter] duration-150 hover:brightness-110 active:scale-[0.97]";
-  const secondaryClass =
-    "inline-flex rounded-md border border-white/25 px-5 py-2.5 text-sm text-[var(--paper)] transition-colors hover:border-white/45 active:scale-[0.97]";
-
   if (slug === "youtube-music-premium") {
     return (
-      <Link href={href} className={primaryClass}>
+      <Link href={href} className="btn-primary">
         View case study
       </Link>
     );
@@ -32,11 +24,11 @@ function CaseStudyCtas({
   if (slug === "tara-hr-coworker") {
     return (
       <>
-        <Link href={href} className={primaryClass}>
+        <Link href={href} className="btn-primary">
           View case study
         </Link>
         {demoHref ? (
-          <Link href={demoHref} className={secondaryClass}>
+          <Link href={demoHref} className="btn-ghost">
             View demo
           </Link>
         ) : null}
@@ -45,9 +37,9 @@ function CaseStudyCtas({
             href={github}
             target="_blank"
             rel="noopener noreferrer"
-            className={secondaryClass}
+            className="btn-text"
           >
-            View on GitHub
+            GitHub →
           </a>
         ) : null}
       </>
@@ -55,7 +47,7 @@ function CaseStudyCtas({
   }
 
   return (
-    <Link href={href} className={primaryClass}>
+    <Link href={href} className="btn-primary">
       View case study
     </Link>
   );
@@ -65,58 +57,26 @@ export function CaseStudies() {
   return (
     <section
       id="case-studies"
-      className="relative scroll-mt-24 border-y border-white/10 bg-[var(--ink-deep)] py-20 sm:py-24"
+      className="relative scroll-mt-24 border-y border-[var(--line)] bg-[var(--paper-elevated)] py-[var(--section-pad)]"
     >
-      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="mx-auto max-w-[1120px] px-5 sm:px-8">
         <SectionHeading
           index="02"
           eyebrow="Case studies"
-          title="YouTube Music Premium+ & Tara AI (GitHub)"
-          description="Interactive product packages you can explore — executive proposal work and an AI recruitment coworker prototype."
+          title="Selected product packages"
+          description="Interactive work you can explore — an executive product proposal and an AI recruitment coworker prototype."
         />
 
-        <Stagger className="mt-12 grid gap-8 lg:grid-cols-2">
+        <ul className="mt-14 divide-y divide-[var(--line)] border-y border-[var(--line)]">
           {portfolioCaseStudies.map((study, i) => (
-            <StaggerItem key={study.slug}>
-              <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/12 bg-[linear-gradient(160deg,rgba(61,184,197,0.12),rgba(12,18,32,0.9))] p-8 shadow-[0_20px_60px_rgba(0,0,0,0.35)] transition-[border-color,transform] duration-200 hover:border-[var(--accent)]/40 hover:translate-y-[-2px]">
-                <div className="flex items-start justify-between gap-4">
-                  <span className="rounded-full border border-white/20 px-3 py-1 text-xs text-[var(--muted-strong)]">
-                    Case study {i + 1}
-                  </span>
-                  <span className="text-xs text-[var(--muted)]">{study.subtitle}</span>
-                </div>
-
-                <h3 className="mt-6 font-[family-name:var(--font-display)] text-2xl tracking-[-0.02em] text-[var(--paper)] sm:text-3xl">
+            <li key={study.slug} className="grid gap-8 py-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+              <div>
+                <p className="eyebrow">Case study {String(i + 1).padStart(2, "0")}</p>
+                <h3 className="font-display mt-4 text-[clamp(1.75rem,3vw,2.35rem)] leading-[1.15] tracking-[-0.02em] text-[var(--ink)]">
                   {study.title}
                 </h3>
-
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-[var(--muted-strong)]">
-                  {study.summary}
-                </p>
-
-                <ul className="mt-6 space-y-2">
-                  {study.highlights.map((item) => (
-                    <li
-                      key={item}
-                      className="relative pl-4 text-sm text-[var(--muted)] before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-[var(--warm)]"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {study.stack.map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-md border border-white/10 bg-black/20 px-2.5 py-1 text-xs text-[var(--muted-strong)]"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-8 flex flex-wrap gap-3 border-t border-white/10 pt-6">
+                <p className="mt-3 text-sm text-[var(--muted)]">{study.subtitle}</p>
+                <div className="mt-8 flex flex-wrap items-center gap-3">
                   <CaseStudyCtas
                     slug={study.slug}
                     href={study.href}
@@ -124,14 +84,30 @@ export function CaseStudies() {
                     github={study.github}
                   />
                 </div>
-              </article>
-            </StaggerItem>
+              </div>
+              <div>
+                <p className="prose-muted text-base sm:text-lg">{study.summary}</p>
+                <ul className="mt-6 space-y-3">
+                  {study.highlights.map((item) => (
+                    <li
+                      key={item}
+                      className="relative pl-4 text-sm text-[var(--muted-strong)] before:absolute before:left-0 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-[var(--accent)]"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 text-xs text-[var(--muted)]">
+                  {study.stack.join(" · ")}
+                </p>
+              </div>
+            </li>
           ))}
-        </Stagger>
+        </ul>
 
-        <Reveal className="mt-10 rounded-xl border border-white/10 bg-white/[0.02] p-5 text-center text-xs text-[var(--muted)]">
+        <p className="mt-10 text-center text-xs text-[var(--muted)]">
           {site.copyright} · Case study materials are proprietary to the author.
-        </Reveal>
+        </p>
       </div>
     </section>
   );
