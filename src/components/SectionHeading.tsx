@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 type SectionHeadingProps = {
   index: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   description?: string;
   id?: string;
@@ -21,7 +21,9 @@ export function SectionHeading({
         <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--accent)]/40 bg-[var(--accent)]/10 text-xs">
           {index}
         </span>
-        <span className="uppercase text-[var(--accent-soft)]">{eyebrow}</span>
+        {eyebrow ? (
+          <span className="uppercase text-[var(--accent-soft)]">{eyebrow}</span>
+        ) : null}
       </p>
       <h2 className="mt-4 max-w-3xl font-[family-name:var(--font-display)] text-3xl tracking-[-0.02em] text-[var(--paper)] sm:text-4xl lg:text-[2.75rem]">
         {title}

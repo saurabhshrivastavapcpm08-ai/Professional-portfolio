@@ -19,33 +19,33 @@ export const about = `Results-driven Product Manager with 4+ years of dedicated 
 export const impactStats = [
   {
     value: "$2M",
-    label: "Incremental revenue via ML-driven pricing",
-    detail: "20.1% paid SKU adoption",
+    label: "Incremental revenue generated",
+    detail: "Pricing, monetization & GTM",
   },
   {
     value: "62%",
-    label: "Faster lead response with AI automation",
-    detail: "18.6% more BDC bookings",
+    label: "Faster lead response",
+    detail: "AI & workflow automation",
   },
   {
-    value: "25.4%",
-    label: "Increase in platform adoption",
-    detail: "38.1% drop in support tickets",
+    value: "30%+",
+    label: "Increase in digital conversion",
+    detail: "Customer experience optimization",
   },
   {
-    value: "63.2%",
-    label: "Reduction in customer check-in time",
-    detail: "~$12K saved per dealership / year",
+    value: "25%+",
+    label: "Increase in product adoption",
+    detail: "Product-led experience improvements",
   },
   {
-    value: "27.2%",
-    label: "Growth in omnichannel interactions",
-    detail: "30.3% mobile conversion lift",
+    value: "63%",
+    label: "Reduction in processing time",
+    detail: "Workflow automation & digital products",
   },
   {
     value: "19%",
     label: "Increase in upsell attach rate",
-    detail: "ML recommendation engine",
+    detail: "ML-powered personalization",
   },
 ];
 

@@ -94,8 +94,7 @@ export function Introduction() {
         <div className="mt-16 border-t border-white/10 pt-12">
           <SectionHeading
             index="→"
-            eyebrow="At a glance"
-            title="Impact that recruiters can scan in seconds"
+            title="Product Impact at a Glance"
           />
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {impactStats.map((stat) => (
