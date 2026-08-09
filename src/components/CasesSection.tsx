@@ -4,6 +4,35 @@ import Link from "next/link";
 import { Reveal } from "@/components/motion";
 import { portfolioCaseStudies, site } from "@/data/content";
 
+function CaseLink({
+  href,
+  children,
+  primary,
+}: {
+  href: string;
+  children: React.ReactNode;
+  primary?: boolean;
+}) {
+  const external = href.startsWith("http");
+  const className = primary
+    ? "rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--bg)] transition-opacity hover:opacity-90"
+    : "rounded-full border border-[var(--line)] px-5 py-2.5 text-sm font-semibold text-[var(--fg)] transition-colors hover:border-[var(--accent)]";
+
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
+  );
+}
+
 export function CasesSection() {
   return (
     <section
@@ -14,11 +43,11 @@ export function CasesSection() {
         <Reveal>
           <p className="eyebrow">02 Cases</p>
           <h2 className="font-display mt-4 text-[clamp(2.25rem,5vw,3.5rem)] tracking-[-0.03em] text-[var(--fg)]">
-            Selected product packages
+            Featured Case Studies
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-            Interactive work you can explore — an executive product proposal and an AI
-            recruitment coworker prototype.
+            Selected examples of product strategy, problem solving, and execution across
+            different product challenges.
           </p>
         </Reveal>
 
@@ -35,19 +64,11 @@ export function CasesSection() {
                   </h3>
                   <p className="mt-3 text-sm text-[var(--muted)]">{study.subtitle}</p>
                   <div className="mt-8 flex flex-wrap items-center gap-3">
-                    <Link
-                      href={study.href}
-                      className="rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--bg)] transition-opacity hover:opacity-90"
-                    >
+                    <CaseLink href={study.href} primary>
                       View case study
-                    </Link>
+                    </CaseLink>
                     {study.slug === "tara-hr-coworker" && study.demoHref ? (
-                      <Link
-                        href={study.demoHref}
-                        className="rounded-full border border-[var(--line)] px-5 py-2.5 text-sm font-semibold text-[var(--fg)] transition-colors hover:border-[var(--accent)]"
-                      >
-                        View demo
-                      </Link>
+                      <CaseLink href={study.demoHref}>View demo</CaseLink>
                     ) : null}
                     {study.slug === "tara-hr-coworker" && study.github ? (
                       <a
