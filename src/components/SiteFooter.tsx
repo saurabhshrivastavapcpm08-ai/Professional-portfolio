@@ -1,48 +1,47 @@
-import Link from "next/link";
-import { CopyrightNotice } from "@/components/CopyrightNotice";
+"use client";
+
+import { Stagger, StaggerItem } from "@/components/motion";
 import { site } from "@/data/content";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[var(--line)] bg-[var(--sand)]">
-      <div className="mx-auto flex max-w-[1140px] flex-col gap-8 px-5 py-12 sm:flex-row sm:items-end sm:justify-between sm:px-8">
-        <div>
-          <p className="font-display text-xl font-bold tracking-[-0.03em] text-[var(--ink)]">
-            {site.name}
-            <span className="text-[var(--accent)]">.</span>
-          </p>
-          <p className="mt-1 text-sm text-[var(--muted)]">{site.title}</p>
-          <CopyrightNotice className="mt-4" />
-        </div>
-        <div className="flex flex-wrap items-center gap-6 text-sm font-semibold">
-          <a
-            href={`mailto:${site.email}`}
-            className="text-[var(--ink-soft)] transition-colors hover:text-[var(--accent)]"
-          >
-            Email
-          </a>
-          <a
-            href={site.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[var(--ink-soft)] transition-colors hover:text-[var(--accent)]"
-          >
-            LinkedIn
-          </a>
-          <a
-            href={site.resumePath}
-            download
-            className="text-[var(--ink-soft)] transition-colors hover:text-[var(--accent)]"
-          >
-            Resume
-          </a>
-          <Link
-            href="/#introduction"
-            className="text-[var(--accent)] hover:text-[var(--accent-deep)]"
-          >
-            Back to top
-          </Link>
-        </div>
+    <footer className="border-t border-[var(--line)] bg-[#0e0e0e] px-5 py-20 sm:px-8 sm:py-28">
+      <div className="mx-auto max-w-6xl">
+        <Stagger>
+          <StaggerItem>
+            <p className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-[-0.03em] text-[var(--fg)]">
+              Let&apos;s build something exceptional together.
+            </p>
+          </StaggerItem>
+
+          <StaggerItem className="mt-12 flex flex-wrap gap-8 text-sm">
+            <a
+              href={`mailto:${site.email}`}
+              className="text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
+            >
+              Email
+            </a>
+            <a
+              href={site.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
+            >
+              LinkedIn
+            </a>
+            <a
+              href={site.resumePath}
+              download
+              className="text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
+            >
+              Resume
+            </a>
+          </StaggerItem>
+
+          <StaggerItem className="mt-16">
+            <p className="text-xs text-[var(--muted)]">{site.copyright}</p>
+          </StaggerItem>
+        </Stagger>
       </div>
     </footer>
   );

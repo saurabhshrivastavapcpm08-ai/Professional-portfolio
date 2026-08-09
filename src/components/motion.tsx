@@ -109,7 +109,8 @@ export function Stagger({
     <motion.div
       className={className}
       initial="hidden"
-      animate="show"
+      whileInView="show"
+      viewport={{ once: true, margin: "-10% 0px" }}
       variants={{
         hidden: {},
         show: {
