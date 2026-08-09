@@ -1,5 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { SectionHeading } from "@/components/SectionHeading";
+import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
+import { TiltCard } from "@/components/TiltCard";
+import { MagneticButton } from "@/components/MagneticButton";
 import { portfolioCaseStudies, site } from "@/data/content";
 
 function CaseStudyCtas({
@@ -15,29 +20,38 @@ function CaseStudyCtas({
 }) {
   if (slug === "youtube-music-premium") {
     return (
-      <Link href={href} className="btn-primary">
+      <MagneticButton
+        href={href}
+        className="bg-[var(--accent)] text-white hover:bg-[var(--accent-deep)]"
+      >
         View case study
-      </Link>
+      </MagneticButton>
     );
   }
 
   if (slug === "tara-hr-coworker") {
     return (
       <>
-        <Link href={href} className="btn-primary">
+        <MagneticButton
+          href={href}
+          className="bg-[var(--accent)] text-white hover:bg-[var(--accent-deep)]"
+        >
           View case study
-        </Link>
+        </MagneticButton>
         {demoHref ? (
-          <Link href={demoHref} className="btn-ghost">
+          <MagneticButton
+            href={demoHref}
+            className="border border-[var(--line)] bg-[var(--chip)] text-[var(--ink)]"
+          >
             View demo
-          </Link>
+          </MagneticButton>
         ) : null}
         {github ? (
           <a
             href={github}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-text"
+            className="text-sm font-bold text-[var(--accent)]"
           >
             GitHub →
           </a>
@@ -47,7 +61,7 @@ function CaseStudyCtas({
   }
 
   return (
-    <Link href={href} className="btn-primary">
+    <Link href={href} className="text-sm font-bold text-[var(--accent)]">
       View case study
     </Link>
   );
@@ -57,53 +71,65 @@ export function CaseStudies() {
   return (
     <section
       id="case-studies"
-      className="relative scroll-mt-24 border-y border-[var(--line)] bg-[var(--paper-elevated)] py-[var(--section-pad)]"
+      className="relative scroll-mt-24 overflow-hidden border-y border-[var(--line)] bg-[var(--sand-2)] py-20 sm:py-28"
     >
-      <div className="mx-auto max-w-[1120px] px-5 sm:px-8">
-        <SectionHeading
-          index="02"
-          eyebrow="Case studies"
-          title="Selected product packages"
-          description="Interactive work you can explore — an executive product proposal and an AI recruitment coworker prototype."
-        />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-1/2 h-32 -translate-y-1/2 rotate-[-3deg] bg-[var(--accent)] opacity-[0.06]"
+      />
+      <div className="relative mx-auto max-w-[1140px] px-5 sm:px-8">
+        <Reveal>
+          <SectionHeading
+            index="02"
+            eyebrow="Case studies"
+            title="Things you can click."
+            description="Interactive product packages — an executive proposal and an AI recruitment coworker prototype."
+          />
+        </Reveal>
 
-        <ul className="mt-14 divide-y divide-[var(--line)] border-y border-[var(--line)]">
+        <Stagger className="mt-14 grid gap-6 lg:grid-cols-2">
           {portfolioCaseStudies.map((study, i) => (
-            <li key={study.slug} className="grid gap-8 py-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-              <div>
-                <p className="eyebrow">Case study {String(i + 1).padStart(2, "0")}</p>
-                <h3 className="font-display mt-4 text-[clamp(1.75rem,3vw,2.35rem)] leading-[1.15] tracking-[-0.02em] text-[var(--ink)]">
-                  {study.title}
-                </h3>
-                <p className="mt-3 text-sm text-[var(--muted)]">{study.subtitle}</p>
-                <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <CaseStudyCtas
-                    slug={study.slug}
-                    href={study.href}
-                    demoHref={study.demoHref}
-                    github={study.github}
-                  />
-                </div>
-              </div>
-              <div>
-                <p className="prose-muted text-base sm:text-lg">{study.summary}</p>
-                <ul className="mt-6 space-y-3">
-                  {study.highlights.map((item) => (
-                    <li
-                      key={item}
-                      className="relative pl-4 text-sm text-[var(--muted-strong)] before:absolute before:left-0 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-[var(--accent)]"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-6 text-xs text-[var(--muted)]">
-                  {study.stack.join(" · ")}
-                </p>
-              </div>
-            </li>
+            <StaggerItem key={study.slug}>
+              <TiltCard>
+                <article className="flex h-full flex-col rounded-[1.75rem] border border-[var(--line)] bg-[var(--surface)] p-7 shadow-[var(--shadow)] sm:p-8">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="rounded-full bg-[var(--accent)] px-3 py-1 text-xs font-bold text-white">
+                      0{i + 1}
+                    </span>
+                    <span className="text-xs text-[var(--muted)]">{study.subtitle}</span>
+                  </div>
+                  <h3 className="font-display mt-6 text-[clamp(1.6rem,3vw,2.1rem)] font-bold leading-[1.1] tracking-[-0.03em] text-[var(--ink)]">
+                    {study.title}
+                  </h3>
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-[var(--ink-soft)] sm:text-base">
+                    {study.summary}
+                  </p>
+                  <ul className="mt-5 space-y-2">
+                    {study.highlights.map((item) => (
+                      <li
+                        key={item}
+                        className="relative pl-4 text-sm text-[var(--muted)] before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-[var(--accent)]"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-5 text-xs text-[var(--muted)]">
+                    {study.stack.join(" · ")}
+                  </p>
+                  <div className="mt-7 flex flex-wrap items-center gap-3 border-t border-[var(--line)] pt-6">
+                    <CaseStudyCtas
+                      slug={study.slug}
+                      href={study.href}
+                      demoHref={study.demoHref}
+                      github={study.github}
+                    />
+                  </div>
+                </article>
+              </TiltCard>
+            </StaggerItem>
           ))}
-        </ul>
+        </Stagger>
 
         <p className="mt-10 text-center text-xs text-[var(--muted)]">
           {site.copyright} · Case study materials are proprietary to the author.
