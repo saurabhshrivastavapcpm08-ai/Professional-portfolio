@@ -482,10 +482,10 @@ export const certifications = [
 ];
 
 export const navItems = [
-  { href: "/#impact", label: "Impact" },
-  { href: "/#projects", label: "Projects" },
+  { href: "/#introduction", label: "Introduction" },
+  { href: "/#work", label: "Work" },
   { href: "/#case-studies", label: "Case Studies" },
-  { href: "/#experience", label: "Experience" },
   { href: "/#skills", label: "Skills" },
+  { href: "/#timeline", label: "Timeline" },
   { href: "/#contact", label: "Contact" },
 ];

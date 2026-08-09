@@ -67,7 +67,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-[var(--ink-deep)] text-[var(--paper)]">
         <ContentProtection />
         <SiteHeader />
-        <main className="flex-1 watermark-protected">{children}</main>
+        <main className="allow-select relative z-0 flex-1">{children}</main>
         <SiteFooter />
       </body>
     </html>

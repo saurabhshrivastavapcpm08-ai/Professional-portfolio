@@ -76,22 +76,4 @@ video {
   color: var(--paper);
 }
 
-.watermark-protected {
-  position: relative;
-}
-
-.watermark-protected::after {
-  content: "© Saurabh Shrivastava";
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: clamp(0.7rem, 1.4vw, 0.95rem);
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: rgba(243, 246, 250, 0.035);
-  transform: rotate(-18deg);
-  white-space: nowrap;
-  z-index: 2;
-}
+/* Copyright lives in footer and case-study pages — no full-page overlay */
