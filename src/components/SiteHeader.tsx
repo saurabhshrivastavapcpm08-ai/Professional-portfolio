@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { MagneticButton } from "@/components/MagneticButton";
 import { navItems, site } from "@/data/content";
 import { cn } from "@/lib/utils";
@@ -95,11 +94,10 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
           <MagneticButton
             href={site.resumePath}
             download
-            className="hidden bg-[var(--accent)] text-white hover:bg-[var(--accent-deep)] sm:inline-flex"
+            className="hidden bg-[var(--accent)] text-[var(--bg)] hover:opacity-90 sm:inline-flex"
           >
             Resume
           </MagneticButton>

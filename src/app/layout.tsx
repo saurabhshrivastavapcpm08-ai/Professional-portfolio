@@ -1,22 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Syne } from "next/font/google";
-import { ClientErrorProbe } from "@/components/ClientErrorProbe";
-import { ContentProtection } from "@/components/ContentProtection";
-import { CustomCursor } from "@/components/CustomCursor";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { Instrument_Serif } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { Providers } from "@/components/Providers";
 import { site } from "@/data/content";
 import "./globals.css";
 
-const display = Syne({
+const display = Instrument_Serif({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
-});
-
-const body = DM_Sans({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -25,12 +18,12 @@ export const metadata: Metadata = {
     template: "%s · Saurabh Shrivastava",
   },
   description:
-    "Senior Product Manager building and scaling AI-powered B2B/B2C SaaS across CRM, customer experience, GTM, and monetization.",
+    "Product Manager building intuitive, high-impact products from concept to launch. Based in Bangalore.",
   metadataBase: new URL("https://saurabhshrivastava.portfolio"),
   openGraph: {
     title: "Saurabh Shrivastava — Product Manager",
     description:
-      "Playful, premium portfolio — AI SaaS, CRM, CX, GTM & monetization.",
+      "Building intuitive, high-impact products from concept to launch. Based in Bangalore.",
     type: "website",
     locale: "en_US",
   },
@@ -38,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Saurabh Shrivastava — Product Manager",
     description:
-      "Playful, premium portfolio — AI SaaS, CRM, CX, GTM & monetization.",
+      "Building intuitive, high-impact products from concept to launch.",
   },
   robots: { index: true, follow: true },
   authors: [{ name: site.name }],
@@ -48,10 +41,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f0e8" },
-    { media: "(prefers-color-scheme: dark)", color: "#14110f" },
-  ],
+  themeColor: "#121212",
   width: "device-width",
   initialScale: 1,
 };
@@ -60,16 +50,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} h-full antialiased`}
-      suppressHydrationWarning
+      className={`${GeistSans.variable} ${display.variable} dark h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-[var(--sand)] text-[var(--ink)]">
-        <ThemeProvider>
-          <ContentProtection />
-          <ClientErrorProbe />
-          <CustomCursor />
-          {children}
-        </ThemeProvider>
+      <body className="flex min-h-full flex-col bg-[var(--bg)] font-sans text-[var(--fg)]">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
