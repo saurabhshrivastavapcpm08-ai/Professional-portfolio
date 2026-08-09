@@ -28,7 +28,7 @@ export function SiteHeader() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[background,border-color,backdrop-filter] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${
         scrolled || open
-          ? "border-b border-white/10 bg-[rgba(10,16,28,0.72)] backdrop-blur-xl"
+          ? "border-b border-white/10 bg-[rgba(10,16,28,0.88)] backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -96,20 +96,21 @@ export function SiteHeader() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <motion.nav
             id="mobile-nav"
-            initial={reduce ? false : { opacity: 0, transform: "translateY(-8px)" }}
+            aria-label="Mobile"
+            initial={reduce ? false : { opacity: 0, transform: "translateY(-6px)" }}
             animate={{ opacity: 1, transform: "translateY(0px)" }}
-            exit={reduce ? undefined : { opacity: 0, transform: "translateY(-8px)" }}
-            transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
-            className="border-t border-white/10 bg-[rgba(10,16,28,0.96)] px-5 py-6 lg:hidden"
+            exit={reduce ? undefined : { opacity: 0, transform: "translateY(-6px)" }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="fixed inset-x-0 top-16 bottom-0 z-50 flex flex-col bg-[rgba(7,11,20,0.97)] px-5 py-8 lg:hidden"
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-5">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
-                  className="text-lg text-[var(--paper)]"
+                  className="font-[family-name:var(--font-display)] text-2xl tracking-[-0.02em] text-[var(--paper)]"
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
@@ -118,14 +119,14 @@ export function SiteHeader() {
               <a
                 href={site.resumePath}
                 download
-                className="mt-2 inline-flex w-fit rounded-md bg-[var(--accent)] px-4 py-2.5 text-sm font-medium text-[var(--ink)]"
+                className="mt-4 inline-flex w-fit rounded-md bg-[var(--accent)] px-4 py-2.5 text-sm font-medium text-[var(--ink)]"
                 onClick={() => setOpen(false)}
               >
                 Download Resume
               </a>
-              <p className="pt-4 text-xs text-[var(--muted)]">{site.copyright}</p>
+              <p className="pt-8 text-xs text-[var(--muted)]">{site.copyright}</p>
             </div>
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </header>

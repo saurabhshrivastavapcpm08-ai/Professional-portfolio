@@ -17,7 +17,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
       "font-src 'self' data:",
-      "connect-src 'self' https://formspree.io",
+      "connect-src 'self' https://formspree.io ws: wss:",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self' mailto:",
@@ -28,6 +28,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
+  allowedDevOrigins: ["127.0.0.1", "localhost"],
   images: {
     formats: ["image/avif", "image/webp"],
   },
