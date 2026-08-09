@@ -11,7 +11,9 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/connectwithsaurabh",
   resumePath: "/resume.pdf",
   copyright: `© ${new Date().getFullYear()} Saurabh Shrivastava. All rights reserved.`,
-  openTo: "Open to mid-management Product Manager roles — let's talk.",
+  openTo: "Open to Senior Product Manager opportunities.",
+  openToDescription:
+    "With 4+ years in Product, I build and scale B2B/B2C SaaS products across AI, CRM, customer experience and digital platforms, spanning product strategy, 0→1 development, execution, GTM and monetization.",
 };
 
 export const about = `Results-driven Product Manager with 4+ years of dedicated product leadership building AI-powered B2B/B2B2C SaaS platforms, backed by 8+ years of cross-functional experience in growth, sales, and operations. I own flagship products end-to-end — from pricing and GTM strategy to AI/ML feature delivery — and specialize in applying generative AI, machine learning, and omnichannel communication architectures to solve real operational problems in regulated, high-scale industries like automotive retail.`;

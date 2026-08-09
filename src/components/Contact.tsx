@@ -15,7 +15,7 @@ export function Contact() {
           index="05"
           eyebrow="Connect"
           title={site.openTo}
-          description="Email, LinkedIn, or download my resume — I respond to thoughtful recruiter and hiring-manager outreach."
+          description={site.openToDescription}
         />
 
         <Reveal className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
