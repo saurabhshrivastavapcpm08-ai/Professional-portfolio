@@ -410,7 +410,7 @@ export const portfolioCaseStudies: PortfolioCaseStudy[] = [
     title: "Tara AI — HR Coworker",
     subtitle: "Recruitment coworker prototype",
     href: "/case-studies/tara-hr-coworker",
-    demoHref: "/case-studies/tara-hr-coworker/demo",
+    demoHref: "/case-studies/tara-hr-coworker#live-demo",
     github: "https://github.com/saurabhshrivastavapcpm08-ai/hr-coworker",
     stack: ["FastAPI", "React", "TypeScript", "Vite"],
     summary:

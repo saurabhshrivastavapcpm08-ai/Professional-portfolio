@@ -55,12 +55,24 @@ body {
   user-select: none;
 }
 
+button,
+a,
+summary,
+details,
+[role="button"],
+[role="tab"] {
+  pointer-events: auto;
+}
+
 input,
 textarea,
 [contenteditable="true"],
-.allow-select {
+.allow-select,
+.allow-interact,
+.allow-interact * {
   -webkit-user-select: text;
   user-select: text;
+  pointer-events: auto;
 }
 
 img,
