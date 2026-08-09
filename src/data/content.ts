@@ -379,8 +379,11 @@ export type PortfolioCaseStudy = {
   slug: string;
   title: string;
   subtitle: string;
+  /** Written case study or primary case study entry */
   href: string;
-  github: string;
+  /** Live app embed (Tara only) */
+  demoHref?: string;
+  github?: string;
   stack: string[];
   summary: string;
   highlights: string[];
@@ -407,6 +410,7 @@ export const portfolioCaseStudies: PortfolioCaseStudy[] = [
     title: "Tara AI — HR Coworker",
     subtitle: "Recruitment coworker prototype",
     href: "/case-studies/tara-hr-coworker",
+    demoHref: "/case-studies/tara-hr-coworker/demo",
     github: "https://github.com/saurabhshrivastavapcpm08-ai/hr-coworker",
     stack: ["FastAPI", "React", "TypeScript", "Vite"],
     summary:

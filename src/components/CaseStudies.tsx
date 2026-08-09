@@ -5,6 +5,62 @@ import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { portfolioCaseStudies, site } from "@/data/content";
 
+function CaseStudyCtas({
+  slug,
+  href,
+  demoHref,
+  github,
+}: {
+  slug: string;
+  href: string;
+  demoHref?: string;
+  github?: string;
+}) {
+  const primaryClass =
+    "inline-flex rounded-md bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ink)] transition-[transform,filter] duration-150 hover:brightness-110 active:scale-[0.97]";
+  const secondaryClass =
+    "inline-flex rounded-md border border-white/25 px-5 py-2.5 text-sm text-[var(--paper)] transition-colors hover:border-white/45 active:scale-[0.97]";
+
+  if (slug === "youtube-music-premium") {
+    return (
+      <Link href={href} className={primaryClass}>
+        View case study
+      </Link>
+    );
+  }
+
+  if (slug === "tara-hr-coworker") {
+    return (
+      <>
+        <Link href={href} className={primaryClass}>
+          View case study
+        </Link>
+        {demoHref ? (
+          <Link href={demoHref} className={secondaryClass}>
+            View demo
+          </Link>
+        ) : null}
+        {github ? (
+          <a
+            href={github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={secondaryClass}
+          >
+            View on GitHub
+          </a>
+        ) : null}
+      </>
+    );
+  }
+
+  return (
+    <Link href={href} className={primaryClass}>
+      View case study
+    </Link>
+  );
+}
+
 export function CaseStudies() {
   return (
     <section
@@ -61,20 +117,12 @@ export function CaseStudies() {
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3 border-t border-white/10 pt-6">
-                  <Link
+                  <CaseStudyCtas
+                    slug={study.slug}
                     href={study.href}
-                    className="inline-flex rounded-md bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--ink)] transition-[transform,filter] duration-150 hover:brightness-110 active:scale-[0.97]"
-                  >
-                    Launch interactive demo
-                  </Link>
-                  <a
-                    href={study.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex rounded-md border border-white/25 px-5 py-2.5 text-sm text-[var(--paper)] transition-colors hover:border-white/45"
-                  >
-                    View on GitHub
-                  </a>
+                    demoHref={study.demoHref}
+                    github={study.github}
+                  />
                 </div>
               </article>
             </StaggerItem>

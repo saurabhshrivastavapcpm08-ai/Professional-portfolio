@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { companies, type CompanyId, type WorkInitiative } from "@/data/work";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -30,7 +31,7 @@ function InitiativeModal({
 
   return (
     <div
-      className="fixed inset-0 z-[80] flex items-end justify-center p-0 sm:items-center sm:p-6"
+      className="fixed inset-0 z-[200] flex items-end justify-center p-0 sm:items-center sm:p-6"
       role="dialog"
       aria-modal="true"
       aria-labelledby="initiative-title"
@@ -41,7 +42,7 @@ function InitiativeModal({
         aria-label="Close"
         onClick={onClose}
       />
-      <div className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-t-2xl border border-white/15 bg-[linear-gradient(165deg,#121a2e,#0a0f1a)] p-6 shadow-2xl sm:rounded-2xl sm:p-8">
+      <div className="relative z-10 max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-t-2xl border border-white/15 bg-[linear-gradient(165deg,#121a2e,#0a0f1a)] p-6 shadow-2xl sm:rounded-2xl sm:p-8">
         <p className="text-xs font-medium uppercase tracking-[0.16em] text-[var(--accent-soft)]">
           {companyName}
         </p>
@@ -93,24 +94,99 @@ function InitiativeModal({
   );
 }
 
-function companyFromParam(value: string | null): CompanyId {
-  if (value === "tekion" || value === "solera") return value;
-  return "solera";
+function companyFromHash(hash: string): CompanyId | null {
+  if (hash === "work-tekion") return "tekion";
+  if (hash === "work-solera") return "solera";
+  return null;
+}
+
+function CompanyPanel({
+  company,
+  isActive,
+  onSelectInitiative,
+}: {
+  company: (typeof companies)[number];
+  isActive: boolean;
+  onSelectInitiative: (initiative: WorkInitiative) => void;
+}) {
+  return (
+    <div
+      role="tabpanel"
+      id={`work-panel-${company.id}`}
+      aria-labelledby={`work-tab-${company.id}`}
+      hidden={!isActive}
+      className={isActive ? "relative z-10 mt-10" : "hidden"}
+    >
+      <article className="rounded-2xl border border-white/10 bg-[linear-gradient(160deg,rgba(255,255,255,0.05),rgba(7,11,20,0.6))] p-6 sm:p-8">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-sm text-[var(--muted-strong)]">{company.role}</p>
+            <p className="mt-1 text-sm text-[var(--muted)]">
+              {company.product}
+              {company.scale ? ` · ${company.scale}` : ""}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {company.focusAreas.map((area) => (
+              <span
+                key={area}
+                className="rounded-full border border-[var(--accent)]/25 bg-[var(--accent)]/10 px-3 py-1 text-[11px] font-medium text-[var(--accent-soft)]"
+              >
+                {area}
+              </span>
+            ))}
+          </div>
+        </div>
+        <p className="mt-6 max-w-3xl text-base leading-relaxed text-[var(--paper)]">
+          {company.story}
+        </p>
+      </article>
+
+      <ul className="relative z-10 mt-8 grid gap-4 sm:grid-cols-2">
+        {company.initiatives.map((initiative, index) => (
+          <li key={initiative.id} className="relative z-10">
+            <button
+              type="button"
+              onClick={() => onSelectInitiative(initiative)}
+              className="relative z-10 flex h-full w-full cursor-pointer flex-col rounded-xl border border-white/10 bg-[var(--ink-deep)]/60 p-5 text-left transition-[border-color,transform] duration-200 hover:border-[var(--accent)]/35 hover:translate-y-[-2px] active:scale-[0.99]"
+            >
+              <span className="text-[11px] font-medium tabular-nums text-[var(--muted)]">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h4 className="mt-2 font-[family-name:var(--font-display)] text-lg text-[var(--paper)]">
+                {initiative.title}
+              </h4>
+              <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-[var(--muted-strong)]">
+                {initiative.impact}
+              </p>
+              <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[var(--accent)]">
+                View initiative
+                <span aria-hidden>→</span>
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export function WorkExperience() {
   const [activeId, setActiveId] = useState<CompanyId>("solera");
-  const [selected, setSelected] = useState<WorkInitiative | null>(null);
+  const [selected, setSelected] = useState<{
+    initiative: WorkInitiative;
+    companyName: string;
+  } | null>(null);
+  const [mounted, setMounted] = useState(false);
 
-  const syncFromHash = useCallback(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    const fromQuery = companyFromParam(params.get("company"));
-    const hash = window.location.hash.replace("#", "");
-    if (hash === "work-tekion") setActiveId("tekion");
-    else if (hash === "work-solera") setActiveId("solera");
-    else setActiveId(fromQuery);
+  useEffect(() => setMounted(true), []);
 
+  const applyHash = useCallback((hashRaw: string) => {
+    const hash = hashRaw.replace("#", "");
+    const fromHash = companyFromHash(hash);
+    if (fromHash) {
+      setActiveId(fromHash);
+    }
     if (hash === "work" || hash === "work-tekion" || hash === "work-solera") {
       requestAnimationFrame(() => {
         document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
@@ -119,30 +195,31 @@ export function WorkExperience() {
   }, []);
 
   useEffect(() => {
-    syncFromHash();
-    window.addEventListener("hashchange", syncFromHash);
-    window.addEventListener("popstate", syncFromHash);
-    return () => {
-      window.removeEventListener("hashchange", syncFromHash);
-      window.removeEventListener("popstate", syncFromHash);
-    };
-  }, [syncFromHash]);
+    applyHash(window.location.hash);
+    const onHashChange = () => applyHash(window.location.hash);
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, [applyHash]);
 
   const selectCompany = (id: CompanyId) => {
     setActiveId(id);
     setSelected(null);
     const hash = id === "tekion" ? "#work-tekion" : "#work-solera";
-    if (window.location.hash !== hash) {
-      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}${hash}`);
+    const next = `${window.location.pathname}${window.location.search}${hash}`;
+    if (`${window.location.pathname}${window.location.search}${window.location.hash}` !== next) {
+      window.history.pushState(null, "", next);
     }
   };
 
-  const company = companies.find((c) => c.id === activeId) ?? companies[0];
+  const openInitiative = (companyId: CompanyId, initiative: WorkInitiative) => {
+    const co = companies.find((c) => c.id === companyId);
+    setSelected({ initiative, companyName: co?.name ?? companyId });
+  };
 
   return (
     <section
       id="work"
-      className="relative scroll-mt-24 overflow-hidden bg-[var(--ink)] py-20 sm:py-28"
+      className="relative scroll-mt-24 bg-[var(--ink)] py-20 sm:py-28"
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-40"
@@ -153,7 +230,7 @@ export function WorkExperience() {
         }}
       />
 
-      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
           index="01"
           eyebrow="Product ownership"
@@ -162,7 +239,7 @@ export function WorkExperience() {
         />
 
         <div
-          className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center"
+          className="relative z-20 mt-10 flex flex-col gap-3 sm:flex-row sm:items-stretch"
           role="tablist"
           aria-label="Select company"
         >
@@ -174,23 +251,24 @@ export function WorkExperience() {
                 type="button"
                 role="tab"
                 aria-selected={isActive}
+                tabIndex={isActive ? 0 : -1}
                 id={`work-tab-${c.id}`}
                 aria-controls={`work-panel-${c.id}`}
                 onClick={() => selectCompany(c.id)}
-                className={`group relative flex-1 overflow-hidden rounded-2xl border px-5 py-4 text-left transition-[border-color,transform,box-shadow] duration-200 active:scale-[0.99] ${
+                className={`relative z-20 flex-1 cursor-pointer overflow-hidden rounded-2xl border px-5 py-4 text-left transition-[border-color,transform,box-shadow] duration-200 active:scale-[0.99] ${
                   isActive
                     ? "border-[var(--accent)]/50 shadow-[0_0_40px_rgba(61,184,197,0.15)]"
                     : "border-white/12 hover:border-white/25"
                 }`}
               >
                 <div
-                  className={`absolute inset-0 opacity-80 transition-opacity ${
+                  className={`pointer-events-none absolute inset-0 opacity-80 transition-opacity ${
                     isActive
                       ? "bg-[linear-gradient(135deg,rgba(61,184,197,0.2),rgba(12,18,32,0.95))]"
                       : "bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(12,18,32,0.9))]"
                   }`}
                 />
-                <div className="relative">
+                <div className="relative z-10">
                   <p className="font-[family-name:var(--font-display)] text-lg text-[var(--paper)]">
                     {c.name}
                   </p>
@@ -204,65 +282,16 @@ export function WorkExperience() {
           })}
         </div>
 
-        <div
-          role="tabpanel"
-          id={`work-panel-${company.id}`}
-          aria-labelledby={`work-tab-${company.id}`}
-          className="mt-10"
-        >
-          <article className="rounded-2xl border border-white/10 bg-[linear-gradient(160deg,rgba(255,255,255,0.05),rgba(7,11,20,0.6))] p-6 sm:p-8">
-            <div className="flex flex-wrap items-start justify-between gap-4">
-              <div>
-                <p className="text-sm text-[var(--muted-strong)]">{company.role}</p>
-                <p className="mt-1 text-sm text-[var(--muted)]">
-                  {company.product}
-                  {company.scale ? ` · ${company.scale}` : ""}
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {company.focusAreas.map((area) => (
-                  <span
-                    key={area}
-                    className="rounded-full border border-[var(--accent)]/25 bg-[var(--accent)]/10 px-3 py-1 text-[11px] font-medium text-[var(--accent-soft)]"
-                  >
-                    {area}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <p className="mt-6 max-w-3xl text-base leading-relaxed text-[var(--paper)]">
-              {company.story}
-            </p>
-          </article>
+        {companies.map((c) => (
+          <CompanyPanel
+            key={c.id}
+            company={c}
+            isActive={c.id === activeId}
+            onSelectInitiative={(initiative) => openInitiative(c.id, initiative)}
+          />
+        ))}
 
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-            {company.initiatives.map((initiative, index) => (
-              <li key={initiative.id}>
-                <button
-                  type="button"
-                  onClick={() => setSelected(initiative)}
-                  className="flex h-full w-full flex-col rounded-xl border border-white/10 bg-[var(--ink-deep)]/60 p-5 text-left transition-[border-color,transform] duration-200 hover:border-[var(--accent)]/35 hover:translate-y-[-2px] active:scale-[0.99]"
-                >
-                  <span className="text-[11px] font-medium tabular-nums text-[var(--muted)]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h4 className="mt-2 font-[family-name:var(--font-display)] text-lg text-[var(--paper)]">
-                    {initiative.title}
-                  </h4>
-                  <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-[var(--muted-strong)]">
-                    {initiative.impact}
-                  </p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[var(--accent)]">
-                    View initiative
-                    <span aria-hidden>→</span>
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <Reveal className="mt-12 flex flex-col items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.02] px-5 py-4 sm:flex-row">
+        <Reveal className="relative z-10 mt-12 flex flex-col items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/[0.02] px-5 py-4 sm:flex-row">
           <p className="text-center text-xs text-[var(--muted)] sm:text-left">
             {site.copyright}
           </p>
@@ -275,13 +304,16 @@ export function WorkExperience() {
         </Reveal>
       </div>
 
-      {selected ? (
-        <InitiativeModal
-          initiative={selected}
-          companyName={company.name}
-          onClose={() => setSelected(null)}
-        />
-      ) : null}
+      {mounted && selected
+        ? createPortal(
+            <InitiativeModal
+              initiative={selected.initiative}
+              companyName={selected.companyName}
+              onClose={() => setSelected(null)}
+            />,
+            document.body,
+          )
+        : null}
     </section>
   );
 }
