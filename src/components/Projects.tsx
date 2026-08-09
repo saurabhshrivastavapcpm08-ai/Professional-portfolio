@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { projects, workCaseStudies, type Project } from "@/data/content";
@@ -47,7 +46,6 @@ function ProjectCard({ project }: { project: Project }) {
 
 export function Projects() {
   const [company, setCompany] = useState<"All" | "Tekion" | "Solera">("All");
-  const reduce = useReducedMotion();
 
   const filtered = useMemo(
     () =>
@@ -90,14 +88,7 @@ export function Projects() {
         <Stagger className="mt-10 grid gap-6 md:grid-cols-2">
           {filtered.map((project) => (
             <StaggerItem key={project.id}>
-              <motion.div
-                layout={!reduce}
-                initial={reduce ? false : { opacity: 0, transform: "translateY(12px)" }}
-                animate={{ opacity: 1, transform: "translateY(0px)" }}
-                transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-              >
-                <ProjectCard project={project} />
-              </motion.div>
+              <ProjectCard project={project} />
             </StaggerItem>
           ))}
         </Stagger>

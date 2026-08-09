@@ -1,13 +1,8 @@
-"use client";
-
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { about, impactStats, site } from "@/data/content";
 
 export function Introduction() {
-  const reduce = useReducedMotion();
-
   return (
     <section
       id="introduction"
@@ -21,57 +16,27 @@ export function Introduction() {
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <div>
-            <motion.p
-              initial={reduce ? false : { opacity: 0, transform: "translateY(10px)" }}
-              animate={{ opacity: 1, transform: "translateY(0px)" }}
-              transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
-              className="text-sm uppercase tracking-[0.22em] text-[var(--accent-soft)]"
-            >
+            <p className="text-sm uppercase tracking-[0.22em] text-[var(--accent-soft)]">
               {site.location}
-            </motion.p>
+            </p>
 
-            <motion.h1
-              initial={reduce ? false : { opacity: 0, transform: "translateY(14px)" }}
-              animate={{ opacity: 1, transform: "translateY(0px)" }}
-              transition={{ duration: 0.5, delay: 0.05, ease: [0.23, 1, 0.32, 1] }}
-              className="mt-4 font-[family-name:var(--font-display)] text-[clamp(2.5rem,7vw,4.5rem)] leading-[0.95] tracking-[-0.03em] text-[var(--paper)]"
-            >
+            <h1 className="mt-4 font-[family-name:var(--font-display)] text-[clamp(2.5rem,7vw,4.5rem)] leading-[0.95] tracking-[-0.03em] text-[var(--paper)]">
               {site.name}
-            </motion.h1>
+            </h1>
 
-            <motion.p
-              initial={reduce ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.45, delay: 0.12 }}
-              className="mt-4 text-xl font-medium text-[var(--paper)] sm:text-2xl"
-            >
+            <p className="mt-4 text-xl font-medium text-[var(--paper)] sm:text-2xl">
               {site.title}
-            </motion.p>
+            </p>
 
-            <motion.p
-              initial={reduce ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.45, delay: 0.16 }}
-              className="mt-3 text-base text-[var(--accent-soft)] sm:text-lg"
-            >
+            <p className="mt-3 text-base text-[var(--accent-soft)] sm:text-lg">
               {site.positioning}
-            </motion.p>
+            </p>
 
-            <motion.p
-              initial={reduce ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.45, delay: 0.2 }}
-              className="mt-6 max-w-xl text-base leading-relaxed text-[var(--muted-strong)]"
-            >
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--muted-strong)]">
               {about}
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={reduce ? false : { opacity: 0, transform: "translateY(8px)" }}
-              animate={{ opacity: 1, transform: "translateY(0px)" }}
-              transition={{ duration: 0.45, delay: 0.26, ease: [0.23, 1, 0.32, 1] }}
-              className="mt-8 flex flex-wrap gap-3"
-            >
+            <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#work"
                 className="inline-flex rounded-md bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[var(--ink)] transition-[transform,filter] duration-150 hover:brightness-110 active:scale-[0.97]"
@@ -91,15 +56,10 @@ export function Introduction() {
               >
                 Download resume
               </a>
-            </motion.div>
+            </div>
           </div>
 
-          <motion.div
-            initial={reduce ? false : { opacity: 0, transform: "translateY(16px)" }}
-            animate={{ opacity: 1, transform: "translateY(0px)" }}
-            transition={{ duration: 0.55, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
-            className="relative mx-auto w-full max-w-md lg:max-w-none"
-          >
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/15 shadow-[0_24px_80px_rgba(0,0,0,0.45)]">
               <Image
                 src="/images/portrait.jpg"
@@ -116,7 +76,7 @@ export function Introduction() {
                 <p className="mt-1 text-sm text-[var(--muted)]">{site.tagline}</p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         <div className="mt-16 border-t border-white/10 pt-12">

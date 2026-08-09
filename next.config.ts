@@ -17,7 +17,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob:",
       "font-src 'self' data:",
-      "connect-src 'self' https://formspree.io ws: wss:",
+      "connect-src 'self' https://formspree.io ws: wss: https:",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self' mailto:",
