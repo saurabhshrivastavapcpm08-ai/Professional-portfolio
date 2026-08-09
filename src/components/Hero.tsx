@@ -12,52 +12,31 @@ export function Hero() {
       id="top"
       className="relative isolate min-h-[100svh] overflow-hidden bg-[var(--ink-deep)]"
     >
-      {/* Full-bleed visual plane */}
+      {/* Full-bleed portrait plane */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-atmosphere.svg"
+          src="/images/portrait.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-[center_18%] scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--ink-deep)] via-[var(--ink-deep)]/80 to-[var(--ink-deep)]/25" />
-        <div
-          className="absolute inset-0 opacity-[0.1]"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cpath d='M0 70H140M70 0V140' stroke='%23ffffff' stroke-width='0.5' fill='none'/%3E%3C/svg%3E\")",
-            backgroundSize: "140px 140px",
-          }}
-        />
+        <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(7,11,20,0.92)_0%,rgba(7,11,20,0.78)_38%,rgba(7,11,20,0.35)_68%,rgba(7,11,20,0.55)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,rgba(61,184,197,0.18),transparent_50%)]" />
         {!reduce && (
-          <>
-            <motion.div
-              aria-hidden
-              className="absolute -right-20 top-1/4 h-[28rem] w-[28rem] rounded-full bg-[var(--accent)]/25 blur-[100px]"
-              animate={{
-                transform: [
-                  "translate3d(0,0,0) scale(1)",
-                  "translate3d(-30px,20px,0) scale(1.08)",
-                  "translate3d(0,0,0) scale(1)",
-                ],
-              }}
-              transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.div
-              aria-hidden
-              className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-[var(--warm)]/20 blur-[90px]"
-              animate={{
-                transform: [
-                  "translate3d(0,0,0)",
-                  "translate3d(24px,-16px,0)",
-                  "translate3d(0,0,0)",
-                ],
-              }}
-              transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </>
+          <motion.div
+            aria-hidden
+            className="absolute -right-16 top-1/4 h-[26rem] w-[26rem] rounded-full bg-[var(--accent)]/20 blur-[110px]"
+            animate={{
+              transform: [
+                "translate3d(0,0,0) scale(1)",
+                "translate3d(-24px,18px,0) scale(1.06)",
+                "translate3d(0,0,0) scale(1)",
+              ],
+            }}
+            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          />
         )}
       </div>
 
