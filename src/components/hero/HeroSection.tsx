@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,12 +11,6 @@ import {
 import { useRef } from "react";
 import { site } from "@/data/content";
 
-const HeroCanvas = dynamic(
-  () =>
-    import("@/components/hero/HeroCanvas").then((m) => m.HeroCanvas),
-  { ssr: false, loading: () => <div className="absolute inset-0" aria-hidden /> },
-);
-
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
@@ -27,12 +20,6 @@ export function HeroSection() {
   });
 
   const textY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 48]);
-  const visualY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -36]);
-  const visualScale = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [1, reduce ? 1 : 0.96],
-  );
 
   return (
     <section
@@ -67,26 +54,19 @@ export function HeroSection() {
           </div>
         </motion.div>
 
-        <motion.div
-          className="relative mx-auto w-full max-w-md lg:max-w-none"
-          style={reduce ? undefined : { y: visualY, scale: visualScale }}
-        >
-          <div className="relative aspect-[4/5]">
-            <div className="absolute inset-0 overflow-hidden border border-[var(--line)] bg-[var(--bg-elevated)]">
-              <Image
-                src="/images/portrait.jpg"
-                alt={`${site.name}, Product Manager`}
-                fill
-                priority
-                sizes="(max-width: 1024px) 90vw, 420px"
-                className="object-cover object-top"
-                draggable={false}
-              />
-            </div>
-            {/* Single hero WebGL layer — transparent, decorative, mouse-reactive */}
-            <HeroCanvas className="absolute -inset-[14%] z-10" />
+        <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+          <div className="relative aspect-[4/5] overflow-hidden border border-[var(--line)] bg-[var(--bg-elevated)]">
+            <Image
+              src="/images/portrait.jpg"
+              alt={`${site.name}, Product Manager`}
+              fill
+              priority
+              sizes="(max-width: 1024px) 90vw, 420px"
+              className="object-cover object-top"
+              draggable={false}
+            />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
