@@ -12,8 +12,6 @@ const study = portfolioCaseStudies.find((s) => s.slug === "tara-hr-coworker")!;
 const liveDemo =
   study.demoHref ??
   "https://p-5173-pod-3r2mlx5ovbbabj4lq4ix2ouvsa-eb93eb2022dbaeaf0f89-us5.agent.cvm.dev/";
-const github =
-  study.github ?? "https://github.com/saurabhshrivastavapcpm08-ai/hr-coworker";
 
 export default function TaraAiCaseStudyPage() {
   return (
@@ -32,14 +30,6 @@ export default function TaraAiCaseStudyPage() {
           className="rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-[var(--bg)]"
         >
           View demo
-        </a>
-        <a
-          href={github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded-full border border-[var(--line)] px-5 py-2.5 text-sm font-semibold text-[var(--fg)]"
-        >
-          GitHub
         </a>
         <Link
           href="/case-studies/tara-hr-coworker"

@@ -5,10 +5,9 @@ type DemoShellProps = {
   title: string;
   subtitle: string;
   demoSrc: string;
-  github: string;
 };
 
-export function DemoShell({ title, subtitle, demoSrc, github }: DemoShellProps) {
+export function DemoShell({ title, subtitle, demoSrc }: DemoShellProps) {
   return (
     <div className="flex min-h-screen flex-col bg-[var(--sand)]">
       <header className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-b border-[var(--line)] bg-[var(--surface)] px-4 py-3 sm:px-6">
@@ -32,14 +31,6 @@ export function DemoShell({ title, subtitle, demoSrc, github }: DemoShellProps) 
             className="rounded-full border border-[var(--line)] px-3 py-2 text-xs font-semibold text-[var(--ink)]"
           >
             Full screen
-          </a>
-          <a
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-[var(--accent)] px-3 py-2 text-xs font-semibold text-white"
-          >
-            GitHub
           </a>
         </div>
       </header>

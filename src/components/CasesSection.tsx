@@ -70,16 +70,6 @@ export function CasesSection() {
                     {study.slug === "tara-hr-coworker" && study.demoHref ? (
                       <CaseLink href={study.demoHref}>View demo</CaseLink>
                     ) : null}
-                    {study.slug === "tara-hr-coworker" && study.github ? (
-                      <a
-                        href={study.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-medium text-[var(--accent)]"
-                      >
-                        GitHub →
-                      </a>
-                    ) : null}
                   </div>
                 </div>
                 <div>

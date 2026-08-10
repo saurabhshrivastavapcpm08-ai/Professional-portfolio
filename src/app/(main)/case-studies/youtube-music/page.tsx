@@ -25,16 +25,6 @@ export default function YouTubeMusicCaseStudyPage() {
         >
           Open interactive proposal
         </Link>
-        {study.github ? (
-          <a
-            href={study.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-[var(--line)] px-5 py-2.5 text-sm font-semibold text-[var(--fg)]"
-          >
-            GitHub
-          </a>
-        ) : null}
       </div>
 
       <div className="mt-14 space-y-12 text-[var(--muted)]">

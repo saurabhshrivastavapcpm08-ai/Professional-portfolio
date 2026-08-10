@@ -385,7 +385,6 @@ export type PortfolioCaseStudy = {
   href: string;
   /** Live app embed (Tara only) */
   demoHref?: string;
-  github?: string;
   stack: string[];
   summary: string;
   highlights: string[];
@@ -397,7 +396,6 @@ export const portfolioCaseStudies: PortfolioCaseStudy[] = [
     title: "YouTube Music Premium+",
     subtitle: "Executive product proposal & planning package",
     href: "/case-studies/youtube-music-premium",
-    github: "https://github.com/saurabhshrivastavapcpm08-ai/yt_casestudy",
     stack: ["Vite", "React", "TypeScript", "Framer Motion"],
     summary:
       "A visual business proposal for a new YouTube Music Premium+ tier — combining Hi-Res audio, Gemini-powered music intelligence, wearable adaptive listening, and Pixel ecosystem integration into a monetizable product narrative.",
@@ -414,7 +412,6 @@ export const portfolioCaseStudies: PortfolioCaseStudy[] = [
     href: "https://p-5173-pod-3r2mlx5ovbbabj4lq4ix2ouvsa-eb93eb2022dbaeaf0f89-us5.agent.cvm.dev/",
     demoHref:
       "https://p-5173-pod-3r2mlx5ovbbabj4lq4ix2ouvsa-eb93eb2022dbaeaf0f89-us5.agent.cvm.dev/",
-    github: "https://github.com/saurabhshrivastavapcpm08-ai/hr-coworker",
     stack: ["FastAPI", "React", "TypeScript", "Vite"],
     summary:
       "An AI recruitment coworker prototype that helps talent teams manage jobs, rank candidates, and chat through suggested next actions — demonstrating product thinking across backend APIs and a polished recruiter UI.",

@@ -11,12 +11,10 @@ function CaseStudyCtas({
   slug,
   href,
   demoHref,
-  github,
 }: {
   slug: string;
   href: string;
   demoHref?: string;
-  github?: string;
 }) {
   if (slug === "youtube-music-premium") {
     return (
@@ -45,16 +43,6 @@ function CaseStudyCtas({
           >
             View demo
           </MagneticButton>
-        ) : null}
-        {github ? (
-          <a
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-bold text-[var(--accent)]"
-          >
-            GitHub →
-          </a>
         ) : null}
       </>
     );
@@ -122,7 +110,6 @@ export function CaseStudies() {
                       slug={study.slug}
                       href={study.href}
                       demoHref={study.demoHref}
-                      github={study.github}
                     />
                   </div>
                 </article>

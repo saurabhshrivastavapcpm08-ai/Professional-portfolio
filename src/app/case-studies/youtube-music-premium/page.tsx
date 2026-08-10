@@ -13,7 +13,6 @@ export default function YouTubeMusicCaseStudyPage() {
       title="YouTube Music Premium+"
       subtitle="Executive product proposal & planning package"
       demoSrc="/demos/yt/"
-      github="https://github.com/saurabhshrivastavapcpm08-ai/yt_casestudy"
     />
   );
 }

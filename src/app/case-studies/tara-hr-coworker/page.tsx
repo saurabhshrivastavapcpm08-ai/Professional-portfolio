@@ -9,8 +9,6 @@ export const metadata: Metadata = {
     "Tara AI — recruitment coworker case study with live prototype workspace.",
 };
 
-const github = "https://github.com/saurabhshrivastavapcpm08-ai/hr-coworker";
-
 export default function TaraHrCaseStudyPage() {
   return (
     <div className="min-h-screen bg-[var(--sand)]">
@@ -33,14 +31,6 @@ export default function TaraHrCaseStudyPage() {
               className="rounded-full bg-[var(--accent)] px-3 py-2 text-xs font-semibold text-white"
             >
               Jump to live demo
-            </a>
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-[var(--line)] px-3 py-2 text-xs font-semibold text-[var(--ink)]"
-            >
-              GitHub
             </a>
           </div>
         </div>

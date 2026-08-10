@@ -77,6 +77,17 @@ body {
 body {
   -webkit-user-select: none;
   user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Only form fields and explicit mailto/download targets stay selectable */
+input,
+textarea,
+[contenteditable="true"],
+.allow-select,
+.allow-select * {
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 button,
@@ -89,18 +100,17 @@ textarea {
   pointer-events: auto;
 }
 
-.allow-select,
-.allow-interact,
-.allow-interact * {
-  -webkit-user-select: text;
-  user-select: text;
-}
-
 img,
 picture,
-video {
+video,
+canvas {
   -webkit-user-drag: none;
   user-drag: none;
+  pointer-events: none;
+}
+
+a img {
+  pointer-events: auto;
 }
 
 ::selection {
