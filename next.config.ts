@@ -30,6 +30,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
   allowedDevOrigins: ["127.0.0.1", "localhost"],
+  transpilePackages: ["three", "@react-three/fiber", "@react-three/drei"],
   images: {
     formats: ["image/avif", "image/webp"],
   },
