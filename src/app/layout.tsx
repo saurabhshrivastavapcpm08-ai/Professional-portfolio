@@ -14,24 +14,24 @@ const display = Instrument_Serif({
 
 export const metadata: Metadata = {
   title: {
-    default: "Saurabh Shrivastava — Product Manager",
-    template: "%s · Saurabh Shrivastava",
+    default: "Saurabh Shrivastava | Product Manager",
+    template: "%s",
   },
   description:
-    "Product Manager building intuitive, high-impact products from concept to launch. Based in Bangalore.",
-  metadataBase: new URL("https://saurabhshrivastava.portfolio"),
+    "Product Manager with 4+ years of experience building AI-powered B2B/B2C SaaS products across CRM, customer experience, automation and digital platforms.",
+  metadataBase: new URL("https://professional-pm-portfolio.vercel.app"),
   openGraph: {
-    title: "Saurabh Shrivastava — Product Manager",
+    title: "Saurabh Shrivastava | Product Manager",
     description:
-      "Building intuitive, high-impact products from concept to launch. Based in Bangalore.",
+      "Product Manager with 4+ years building AI-powered B2B/B2C SaaS across CRM, CX, automation and digital platforms.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Saurabh Shrivastava — Product Manager",
+    title: "Saurabh Shrivastava | Product Manager",
     description:
-      "Building intuitive, high-impact products from concept to launch.",
+      "Product Manager with 4+ years building AI-powered B2B/B2C SaaS products.",
   },
   robots: { index: true, follow: true },
   authors: [{ name: site.name }],

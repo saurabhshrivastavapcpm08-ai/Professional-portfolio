@@ -1,6 +1,6 @@
 export const site = {
   name: "Saurabh Shrivastava",
-  title: "Strategic Product Manager",
+  title: "Product Manager",
   positioning: "AI-Powered SaaS & Omnichannel Communications | GTM & Monetization",
   tagline:
     "4+ years building AI-powered B2B/B2B2C SaaS platforms, backed by 8+ years driving growth, sales, and operations.",
@@ -489,9 +489,10 @@ export const certifications = [
 ];
 
 export const navItems = [
-  { href: "/#work", label: "Work" },
-  { href: "/#cases", label: "Cases" },
-  { href: "/#skills", label: "Skills" },
-  { href: "/#timeline", label: "Timeline" },
-  { href: "/#connect", label: "Connect" },
+  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/about", label: "About" },
+  { href: "/resume", label: "Resume" },
+  { href: "/contact", label: "Contact" },
 ];

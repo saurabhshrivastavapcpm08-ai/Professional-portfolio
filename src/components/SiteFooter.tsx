@@ -1,47 +1,73 @@
-"use client";
-
-import { Stagger, StaggerItem } from "@/components/motion";
+import Link from "next/link";
 import { site } from "@/data/content";
+
+const footerLinks = [
+  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/about", label: "About" },
+  { href: "/resume", label: "Resume" },
+  { href: "/contact", label: "Contact" },
+];
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[var(--line)] bg-[#0e0e0e] px-5 py-20 sm:px-8 sm:py-28">
-      <div className="mx-auto max-w-6xl">
-        <Stagger>
-          <StaggerItem>
-            <p className="font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-[-0.03em] text-[var(--fg)]">
-              Let&apos;s build something exceptional together.
-            </p>
-          </StaggerItem>
+    <footer className="mt-auto border-t border-[var(--line)] bg-[#0e0e0e]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-[1.2fr_1fr_1fr]">
+        <div>
+          <p className="font-display text-xl tracking-[-0.02em] text-[var(--fg)]">
+            {site.name}
+          </p>
+          <p className="mt-2 text-sm text-[var(--muted)]">
+            Product Manager · AI · SaaS · Customer Experience
+          </p>
+          <p className="mt-1 text-sm text-[var(--muted)]">{site.location}</p>
+        </div>
 
-          <StaggerItem className="mt-12 flex flex-wrap gap-8 text-sm">
-            <a
-              href={`mailto:${site.email}`}
-              className="text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
-            >
-              Email
-            </a>
-            <a
-              href={site.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
-            >
-              LinkedIn
-            </a>
-            <a
-              href={site.resumePath}
-              download
-              className="text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
-            >
-              Resume
-            </a>
-          </StaggerItem>
+        <div>
+          <p className="eyebrow mb-4">Navigate</p>
+          <ul className="space-y-2">
+            {footerLinks.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="text-sm text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          <StaggerItem className="mt-16">
-            <p className="text-xs text-[var(--muted)]">{site.copyright}</p>
-          </StaggerItem>
-        </Stagger>
+        <div>
+          <p className="eyebrow mb-4">Connect</p>
+          <ul className="space-y-2">
+            <li>
+              <a
+                href={site.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
+              >
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a
+                href={`mailto:${site.email}`}
+                className="text-sm text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
+              >
+                Email
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="border-t border-[var(--line)]">
+        <p className="mx-auto max-w-6xl px-5 py-5 text-xs text-[var(--muted)] sm:px-8">
+          {site.copyright}
+        </p>
       </div>
     </footer>
   );

@@ -18,10 +18,10 @@ export default function TaraHrCaseStudyPage() {
         <div className="mx-auto flex max-w-[1140px] flex-wrap items-center justify-between gap-3 px-5 py-3 sm:px-8">
           <div className="min-w-0">
             <Link
-              href="/#case-studies"
+              href="/case-studies"
               className="text-sm font-semibold text-[var(--muted)] hover:text-[var(--accent)]"
             >
-              ← Back to portfolio
+              ← Back to case studies
             </Link>
             <h1 className="font-display mt-1 text-lg font-bold text-[var(--ink)] sm:text-xl">
               Tara AI — HR Coworker

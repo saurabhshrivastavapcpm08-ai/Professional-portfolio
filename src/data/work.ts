@@ -33,12 +33,12 @@ export const companies: CompanyWork[] = [
     scale: "4,000+ dealerships",
     headline: "Scale, platform & commercial product leadership",
     story:
-      "I build and scale AI-powered customer engagement and SaaS platform capabilities — from product strategy and execution through GTM and revenue.",
+      "I build and scale AI-powered customer engagement and SaaS platform capabilities — from product strategy and execution through GTM and monetization.",
     focusAreas: [
       "AI & CRM",
       "Customer 360",
       "Omnichannel",
-      "Digital retailing",
+      "Digital Retailing",
       "Monetization",
     ],
     initiatives: [
@@ -181,10 +181,10 @@ export const companies: CompanyWork[] = [
       "I turned complex automotive workflows into scalable digital products — combining customer experience, machine learning, and operational automation.",
     focusAreas: [
       "B2B2C",
-      "Customer experience",
+      "Customer Experience",
       "ML",
-      "Workflow automation",
-      "SaaS onboarding",
+      "Workflow Automation",
+      "SaaS Onboarding",
     ],
     initiatives: [
       {

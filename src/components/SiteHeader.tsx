@@ -1,49 +1,40 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { site } from "@/data/content";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "/#work", id: "work", label: "Work" },
-  { href: "/#cases", id: "cases", label: "Cases" },
-  { href: "/#skills", id: "skills", label: "Skills" },
-  { href: "/#timeline", id: "timeline", label: "Timeline" },
-  { href: "/#connect", id: "connect", label: "Connect" },
+  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/about", label: "About" },
 ] as const;
 
+function isActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function SiteHeader() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive] = useState("work");
   const reduce = useReducedMotion();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 10);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    const ids = ["hero", "work", "cases", "skills", "timeline", "connect"];
-    const observers: IntersectionObserver[] = [];
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActive(id === "hero" ? "work" : id);
-        },
-        { rootMargin: "-35% 0px -50% 0px", threshold: 0 },
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -55,44 +46,61 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[background,backdrop-filter,border-color] duration-300",
+        "fixed inset-x-0 top-0 z-50 transition-[height,background,backdrop-filter,border-color] duration-300",
         scrolled || open
-          ? "border-b border-white/10 bg-[#121212]/80 backdrop-blur-xl"
+          ? "border-b border-white/10 bg-[#121212]/80 backdrop-blur-md"
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-[var(--header-h)] max-w-6xl items-center justify-between px-5 sm:px-8">
+      <div
+        className={cn(
+          "mx-auto flex max-w-6xl items-center justify-between px-5 transition-[height] duration-300 sm:px-8",
+          scrolled ? "h-14" : "h-16",
+        )}
+      >
         <Link
-          href="/#hero"
-          onClick={() => setOpen(false)}
-          className="font-display text-lg tracking-[-0.02em] text-[var(--fg)] transition-opacity hover:opacity-80 sm:text-xl"
+          href="/"
+          className="font-display text-lg tracking-[-0.02em] text-[var(--fg)] sm:text-xl"
         >
           {site.name}
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
-          {navLinks.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "group relative text-sm tracking-wide transition-colors duration-200",
-                active === item.id
-                  ? "text-[var(--fg)]"
-                  : "text-[var(--muted)] hover:text-[var(--fg)]",
-              )}
-            >
-              {item.label}
-              <span
+          {navLinks.map((item) => {
+            const active = isActive(pathname, item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
                 className={cn(
-                  "absolute -bottom-1 left-0 h-px origin-left bg-[var(--accent)] transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
-                  active === item.id
-                    ? "w-full scale-x-100"
-                    : "w-full scale-x-0 group-hover:scale-x-100",
+                  "group relative text-sm tracking-wide transition-colors duration-200",
+                  active
+                    ? "text-[var(--fg)]"
+                    : "text-[var(--muted)] hover:text-[var(--fg)]",
                 )}
-              />
-            </a>
-          ))}
+              >
+                {item.label}
+                <span
+                  className={cn(
+                    "absolute -bottom-1 left-0 h-px origin-left bg-[var(--accent)] transition-transform duration-300",
+                    active ? "w-full scale-x-100" : "w-full scale-x-0 group-hover:scale-x-100",
+                  )}
+                />
+              </Link>
+            );
+          })}
+          <Link
+            href="/resume"
+            className="rounded-full border border-[var(--line)] px-3.5 py-1.5 text-sm text-[var(--fg)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            Resume
+          </Link>
+          <Link
+            href="/contact"
+            className="text-sm text-[var(--muted)] transition-colors hover:text-[var(--fg)]"
+          >
+            Contact
+          </Link>
         </nav>
 
         <button
@@ -103,7 +111,6 @@ export function SiteHeader() {
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="sr-only">Menu</span>
           <div className="relative h-3.5 w-4">
             <span
               className={cn(
@@ -132,23 +139,25 @@ export function SiteHeader() {
           <motion.nav
             id="mobile-nav"
             aria-label="Mobile"
-            initial={reduce ? false : { opacity: 0, y: -8 }}
+            initial={reduce ? false : { opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={reduce ? undefined : { opacity: 0, y: -8 }}
-            transition={{ duration: 0.25 }}
+            exit={reduce ? undefined : { opacity: 0, y: -6 }}
+            transition={{ duration: 0.2 }}
             className="border-t border-white/10 bg-[#121212] px-5 py-8 md:hidden"
           >
             <div className="flex flex-col gap-5">
-              {navLinks.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="font-display text-3xl text-[var(--fg)]"
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
+              {[...navLinks, { href: "/resume", label: "Resume" }, { href: "/contact", label: "Contact" }].map(
+                (item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="font-display text-3xl text-[var(--fg)]"
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ),
+              )}
             </div>
           </motion.nav>
         ) : null}
