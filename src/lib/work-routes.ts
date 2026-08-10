@@ -131,3 +131,56 @@ export const productFocus = [
       "Connecting product value with pricing, packaging, adoption and revenue.",
   },
 ] as const;
+
+/** Homepage — How I Approach Product */
+export const homeProductApproach = [
+  {
+    number: "01",
+    title: "Discover",
+    description:
+      "Understand the customer, business and problem before defining the solution.",
+  },
+  {
+    number: "02",
+    title: "Define",
+    description:
+      "Turn insights into product strategy, priorities and a clear path to value.",
+  },
+  {
+    number: "03",
+    title: "Build",
+    description:
+      "Work closely with design and engineering to turn concepts into scalable products.",
+  },
+  {
+    number: "04",
+    title: "Measure",
+    description:
+      "Use adoption, conversion, revenue, efficiency and customer feedback to evaluate outcomes.",
+  },
+  {
+    number: "05",
+    title: "Scale",
+    description:
+      "Double down on what works and turn successful capabilities into repeatable products.",
+  },
+] as const;
+
+/** Featured work on home — curated per company for the experience selector */
+export const featuredByCompany: Record<"solera" | "tekion", readonly string[]> = {
+  solera: ["solera-ai-bdc", "solera-unified-profile", "solera-omnichannel", "solera-monetization"],
+  tekion: [
+    "tekion-onboarding",
+    "tekion-ml-recs",
+    "tekion-portal",
+    "tekion-documents",
+  ],
+};
+
+export function getFeaturedProjectsForCompany(companyId: "solera" | "tekion") {
+  const ids = featuredByCompany[companyId];
+  const all = getCompanyProjects(companyId);
+  return ids
+    .map((id) => all.find((p) => p.initiative.id === id))
+    .filter((p): p is ProjectRecord => p != null);
+}

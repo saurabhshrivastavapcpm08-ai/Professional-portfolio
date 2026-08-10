@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { FeaturedWorkHome } from "@/components/FeaturedWorkHome";
 import { Reveal } from "@/components/motion";
 import { impactStats, portfolioCaseStudies, site } from "@/data/content";
-import { getFeaturedProjects, productFocus } from "@/lib/work-routes";
+import { homeProductApproach } from "@/lib/work-routes";
 
 export const metadata: Metadata = {
   title: "Saurabh Shrivastava | Product Manager",
@@ -12,8 +13,6 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  const featured = getFeaturedProjects();
-
   return (
     <>
       {/* Hero */}
@@ -83,78 +82,40 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Product focus */}
-      <section className="px-5 py-20 sm:px-8">
+      {/* How I Approach Product */}
+      <section className="px-5 py-20 sm:px-8" aria-labelledby="approach-home">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <p className="eyebrow">Product focus</p>
-            <h2 className="font-display mt-3 text-[clamp(1.85rem,3.5vw,2.6rem)] tracking-[-0.02em] text-[var(--fg)]">
-              Where I build
+            <p className="eyebrow">Product approach</p>
+            <h2
+              id="approach-home"
+              className="font-display mt-3 text-[clamp(1.85rem,3.5vw,2.6rem)] tracking-[-0.02em] text-[var(--fg)]"
+            >
+              How I Approach Product
             </h2>
           </Reveal>
-          <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {productFocus.map((item) => (
-              <li key={item.title} className="border-t border-[var(--line)] pt-5">
-                <h3 className="text-base font-medium text-[var(--fg)]">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                  {item.description}
+          <ol className="mt-12 grid gap-0 border-t border-[var(--line)] sm:grid-cols-2 lg:grid-cols-5">
+            {homeProductApproach.map((step, i) => (
+              <li
+                key={step.number}
+                className={`border-[var(--line)] py-8 pr-5 ${
+                  i < homeProductApproach.length - 1 ? "lg:border-r lg:pr-6" : ""
+                } ${i % 2 === 0 ? "sm:border-r sm:pr-6 lg:border-r" : "sm:pl-6 sm:pr-0 lg:pl-0"} border-b last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0 lg:border-b-0`}
+              >
+                <p className="font-mono text-[11px] tracking-[0.14em] text-[var(--accent)]">
+                  {step.number} — {step.title}
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-[var(--muted)]">
+                  {step.description}
                 </p>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </section>
 
-      {/* Featured work */}
-      <section className="border-y border-[var(--line)] px-5 py-20 sm:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="eyebrow">Featured work</p>
-              <h2 className="font-display mt-3 text-[clamp(1.85rem,3.5vw,2.6rem)] tracking-[-0.02em] text-[var(--fg)]">
-                Selected product initiatives
-              </h2>
-            </div>
-            <Link
-              href="/work"
-              className="text-sm font-medium text-[var(--accent)] transition-colors hover:text-[var(--fg)]"
-            >
-              View all work →
-            </Link>
-          </div>
-          <ul className="mt-12 divide-y divide-[var(--line)] border-y border-[var(--line)]">
-            {featured.map((project, i) => (
-              <li key={project.initiative.id}>
-                <Link
-                  href={project.href}
-                  className="group grid gap-3 py-8 transition-colors hover:bg-white/[0.02] sm:grid-cols-[3.5rem_1fr_auto] sm:items-baseline sm:gap-8"
-                >
-                  <span className="text-sm tabular-nums text-[var(--muted)]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <p className="text-xs tracking-[0.14em] text-[var(--muted)] uppercase">
-                      {project.company.name}
-                    </p>
-                    <h3 className="font-display mt-1 text-xl tracking-[-0.02em] text-[var(--fg)] sm:text-2xl">
-                      {project.initiative.title}
-                    </h3>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
-                      {project.initiative.impact}
-                    </p>
-                    <p className="mt-3 text-xs text-[var(--accent)]">
-                      {project.initiative.keywords.slice(0, 3).join(" · ")}
-                    </p>
-                  </div>
-                  <span className="text-sm text-[var(--accent)] transition-transform duration-200 group-hover:translate-x-0.5">
-                    View →
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      {/* Featured work — experience → company → projects → detail */}
+      <FeaturedWorkHome />
 
       {/* Featured case studies */}
       <section className="px-5 py-20 sm:px-8">
@@ -202,16 +163,20 @@ export default function HomePage() {
 
       {/* Short about + contact CTA */}
       <section className="border-t border-[var(--line)] px-5 py-20 sm:px-8">
-        <div className="mx-auto max-w-6xl grid gap-12 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
           <div>
             <p className="eyebrow">About</p>
             <h2 className="font-display mt-3 text-3xl tracking-[-0.02em] text-[var(--fg)]">
-              Product thinking at the intersection of people, technology and business.
+              Product Manager focused on turning complex problems into scalable products.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-[var(--muted)]">
-              {aboutIntro}
+              4+ years Product · 8+ years cross-functional. I build and scale B2B, B2C and
+              B2B2C SaaS across AI/ML, customer experience, automation and monetization.
             </p>
-            <Link href="/about" className="mt-6 inline-block text-sm font-medium text-[var(--accent)]">
+            <Link
+              href="/about"
+              className="mt-6 inline-block text-sm font-medium text-[var(--accent)]"
+            >
               More about me →
             </Link>
           </div>
@@ -236,6 +201,3 @@ export default function HomePage() {
     </>
   );
 }
-
-const aboutIntro =
-  "I have 4+ years of dedicated product experience, backed by 8+ years across growth, sales and operations. I focus on translating customer and business problems into shipped SaaS capabilities — from discovery and roadmap through GTM and monetization.";
