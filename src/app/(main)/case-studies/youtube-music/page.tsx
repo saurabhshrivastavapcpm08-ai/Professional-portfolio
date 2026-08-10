@@ -84,7 +84,7 @@ export default function YouTubeMusicCaseStudyPage() {
 
         <Section title="MVP → V2 roadmap">
           Executive summary, product inputs, engineering specs, and an MVP → V1 → V2
-          roadmap — available in the interactive proposal and GitHub repository.
+          roadmap — available in the interactive proposal.
         </Section>
 
         <Section title="Success metrics">

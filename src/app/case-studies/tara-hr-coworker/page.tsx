@@ -81,7 +81,7 @@ export default function TaraHrCaseStudyPage() {
         <div className="mx-auto max-w-[1140px] px-5 py-10 sm:px-8">
           <h2 className="font-display text-2xl font-bold text-[var(--ink)]">Live prototype</h2>
           <p className="mt-2 max-w-2xl text-sm text-[var(--muted)]">
-            Add candidates, review reqs, and ask Tara — same UI as the GitHub repo, running
+            Add candidates, review reqs, and ask Tara — the recruiter workspace below runs
             against the portfolio API.
           </p>
         </div>

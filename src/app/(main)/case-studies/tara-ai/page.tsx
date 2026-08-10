@@ -76,8 +76,7 @@ export default function TaraAiCaseStudyPage() {
 
         <Section title="Prototype">
           Live demo and embedded workspace are available above and via the prototype route.
-          Add candidates, review reqs, and ask Tara against the same product narrative as the
-          GitHub repository.
+          Add candidates, review reqs, and ask Tara in the recruiter workspace.
         </Section>
 
         <Section title="Key features">
