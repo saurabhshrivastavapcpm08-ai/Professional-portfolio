@@ -134,7 +134,7 @@ export function FeaturedWorkHome() {
         </AnimatePresence>
 
         {/* Projects */}
-        <ul className="mt-12 divide-y divide-[var(--line)] border-y border-[var(--line)]">
+        <ul className="mt-12 divide-y divide-[var(--line)] border-y border-[var(--line)] [perspective:1000px]">
           {projects.map((project, i) => {
             const open = activeId === project.initiative.id;
             return (
@@ -143,19 +143,43 @@ export function FeaturedWorkHome() {
                   type="button"
                   onClick={() => toggleProject(project.initiative.id)}
                   aria-expanded={open}
-                  className="group grid w-full gap-3 py-7 text-left transition-colors hover:bg-white/[0.02] sm:grid-cols-[3.5rem_1fr_auto] sm:items-baseline sm:gap-8"
+                  className={cn(
+                    "group grid w-full gap-3 py-7 text-left transition-[transform,background-color] duration-300 hover:bg-white/[0.02] sm:grid-cols-[3.5rem_1fr_auto] sm:items-baseline sm:gap-8",
+                    !reduce &&
+                      "md:[transform-style:preserve-3d] md:hover:[transform:rotateX(2deg)_rotateY(-1.5deg)_translateZ(8px)]",
+                  )}
                 >
-                  <span className="text-sm tabular-nums text-[var(--muted)]">
+                  <span
+                    className={cn(
+                      "text-sm tabular-nums text-[var(--muted)] transition-transform duration-300",
+                      !reduce && "md:group-hover:[transform:translateZ(28px)]",
+                    )}
+                  >
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <div>
+                  <div
+                    className={cn(
+                      "transition-transform duration-300",
+                      !reduce && "md:group-hover:[transform:translateZ(16px)]",
+                    )}
+                  >
                     <h3 className="font-display text-xl tracking-[-0.02em] text-[var(--fg)] sm:text-2xl">
                       {project.initiative.title}
                     </h3>
-                    <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
+                    <p
+                      className={cn(
+                        "mt-2 max-w-2xl text-sm leading-relaxed text-[var(--muted)] transition-transform duration-300",
+                        !reduce && "md:group-hover:[transform:translateZ(6px)]",
+                      )}
+                    >
                       {project.initiative.impact}
                     </p>
-                    <p className="mt-3 text-xs text-[var(--accent)]">
+                    <p
+                      className={cn(
+                        "mt-3 text-xs text-[var(--accent)] transition-transform duration-300",
+                        !reduce && "md:group-hover:[transform:translateZ(4px)]",
+                      )}
+                    >
                       {project.initiative.keywords.slice(0, 3).join(" · ")}
                     </p>
                   </div>
@@ -163,6 +187,7 @@ export function FeaturedWorkHome() {
                     className={cn(
                       "text-sm text-[var(--accent)] transition-transform duration-200",
                       open ? "translate-x-0.5" : "group-hover:translate-x-0.5",
+                      !reduce && "md:group-hover:[transform:translateZ(22px)_translateX(2px)]",
                     )}
                   >
                     {open ? "Close" : "View impact →"}
